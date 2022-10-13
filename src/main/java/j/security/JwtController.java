@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -64,6 +65,18 @@ public class JwtController {
         System.out.println("getSecret is called");
         Map<String,String > map = new HashMap<>();
         map.put("message","this is secret from server");
+        return ResponseEntity.ok(map);
+    }
+
+    @DeleteMapping("/deleteUser")
+    public ResponseEntity<Map> deleteUser(@RequestBody User user) { // hvis man kommer hertil, er token OK
+        System.out.println("deleteUser is called with user: " + user.getUsername());
+        // evt. findById, som finder hele objektet fra MySQL, inkl. id.
+        List<User> users =  userService.findByName(user.getUsername());
+        User userToDelete = users.get(0);
+        userService.delete(userToDelete);
+        Map<String,String > map = new HashMap<>();
+        map.put("message","user deleted, if found " + user.getUsername());
         return ResponseEntity.ok(map);
     }
 
