@@ -1,6 +1,6 @@
-package j.service;
+package j.security.service;
 
-import j.model.User;
+import j.security.model.User;
 
 import java.util.List;
 

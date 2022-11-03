@@ -1,4 +1,4 @@
-package j.config;
+package j.security.config;
 
 import j.security.JwtAuthenticationEntryPoint;
 import j.security.JwtFilter;

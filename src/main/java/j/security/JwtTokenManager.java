@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.*;
 
 @Component
-public class TokenManager  {
+public class JwtTokenManager {
     public static final long TOKEN_VALIDITY = 10 * 60 * 60 * 1000; // 10 timer
     @Value("${secret}") // aha: this is the server's private key. Which is used to generate new tokens.
     private String jwtSecret;

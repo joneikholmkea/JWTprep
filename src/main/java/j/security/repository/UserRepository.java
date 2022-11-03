@@ -1,6 +1,6 @@
-package j.repository;
+package j.security.repository;
 
-import j.model.User;
+import j.security.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

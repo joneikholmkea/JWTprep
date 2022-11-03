@@ -1,6 +1,7 @@
 package j.security;
 
 import io.jsonwebtoken.ExpiredJwtException;
+import j.security.service.JwtUserDetailsService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,7 +20,7 @@ import java.io.IOException;
 @Component
 public class JwtFilter extends OncePerRequestFilter {
     private JwtUserDetailsService userDetailsService;
-    private TokenManager tokenManager;
+    private JwtTokenManager jwtTokenManager;
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response, FilterChain filterChain)
@@ -31,7 +32,7 @@ public class JwtFilter extends OncePerRequestFilter {
         if (tokenHeader != null && tokenHeader.startsWith("Bearer ")) {
             token = tokenHeader.substring(7);
             try {
-                username = tokenManager.getUsernameFromToken(token);
+                username = jwtTokenManager.getUsernameFromToken(token);
             } catch (IllegalArgumentException e) {
                 System.out.println("Unable to get JWT Token");
             } catch (ExpiredJwtException e) {
@@ -47,7 +48,7 @@ public class JwtFilter extends OncePerRequestFilter {
     private void validateToken(HttpServletRequest request, String username, String token) {
         if (null != username && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-            if (tokenManager.validateJwtToken(token, userDetails)) {
+            if (jwtTokenManager.validateJwtToken(token, userDetails)) {
                 UsernamePasswordAuthenticationToken
                         authenticationToken = new UsernamePasswordAuthenticationToken(
                         userDetails, null,

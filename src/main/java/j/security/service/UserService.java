@@ -1,8 +1,8 @@
-package j.service;
+package j.security.service;
 
-import j.config.SecurityConfiguration;
-import j.model.User;
-import j.repository.UserRepository;
+import j.security.config.SecurityConfiguration;
+import j.security.model.User;
+import j.security.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -26,8 +26,10 @@ public class UserService implements IUserService{
 
     @Override
     public User save(User user) {
-        PasswordEncoder pw = SecurityConfiguration.passwordEncoder();
-        user.setPassword(pw.encode(user.getPassword()));
+//        if(user.getPassword() == null) {
+            PasswordEncoder pw = SecurityConfiguration.passwordEncoder();
+            user.setPassword(pw.encode(user.getPassword()));
+//        }
         return userRepository.save(user);
     }
 

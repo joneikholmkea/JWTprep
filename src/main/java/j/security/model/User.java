@@ -1,4 +1,4 @@
-package j.model;
+package j.security.model;
 
 
 import lombok.Getter;

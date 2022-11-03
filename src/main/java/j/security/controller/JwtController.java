@@ -1,9 +1,11 @@
-package j.security;
+package j.security.controller;
 
-import j.security.models.JwtRequestModel;
-import j.security.models.JwtResponseModel;
-import j.model.User;
-import j.service.IUserService;
+import j.security.service.JwtUserDetailsService;
+import j.security.JwtTokenManager;
+import j.security.model.JwtRequestModel;
+import j.security.model.JwtResponseModel;
+import j.security.model.User;
+import j.security.service.IUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,7 +24,7 @@ import java.util.Map;
 public class JwtController {
     private JwtUserDetailsService userDetailsService;
     private AuthenticationManager authenticationManager;
-    private TokenManager tokenManager;
+    private JwtTokenManager jwtTokenManager;
     private IUserService userService;
 
     @PostMapping("/signup")
@@ -55,7 +57,7 @@ public class JwtController {
             return ResponseEntity.ok(new JwtResponseModel("bad credentials"));
         }
         final UserDetails userDetails = userDetailsService.loadUserByUsername(request.getUsername());
-        final String jwtToken = tokenManager.generateJwtToken(userDetails);
+        final String jwtToken = jwtTokenManager.generateJwtToken(userDetails);
         return ResponseEntity.ok(new JwtResponseModel(jwtToken));
     }
 
