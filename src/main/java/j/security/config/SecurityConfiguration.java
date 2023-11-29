@@ -62,4 +62,5 @@ public class SecurityConfiguration implements WebMvcConfigurer {
                 .allowCredentials(true);
     }
 
+
 }
