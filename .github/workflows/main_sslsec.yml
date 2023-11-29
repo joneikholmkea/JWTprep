@@ -50,4 +50,4 @@ jobs:
           app-name: 'sslsec'
           slot-name: 'Production'
           package: '*.jar'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_3918C58DD20541A2A046235A29ADACBD }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_7D3499E6CABB4C3A8F3EF358E958C027 }}
