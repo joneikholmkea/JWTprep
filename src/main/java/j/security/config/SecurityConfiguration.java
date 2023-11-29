@@ -38,7 +38,7 @@ public class SecurityConfiguration implements WebMvcConfigurer {
         http.cors().and().csrf().disable()  // was cors().and() after http
                 // to implement CSRF token https://www.javainuse.com/spring/boot_security_csrf
                 // "antMathcers" comes from Apache Ant build system.
-        .authorizeRequests().antMatchers("/**").permitAll()
+        .authorizeRequests().antMatchers("/signup", "/login").permitAll()
         .anyRequest().authenticated()
         .and()
         .exceptionHandling().authenticationEntryPoint(authenticationEntryPoint)
