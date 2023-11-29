@@ -7,6 +7,8 @@ import j.security.model.JwtResponseModel;
 import j.security.model.User;
 import j.security.service.IUserService;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -21,10 +23,15 @@ import java.util.Map;
 
 @RestController
 @AllArgsConstructor
+@NoArgsConstructor
 public class JwtController {
+    @Autowired
     private JwtUserDetailsService userDetailsService;
+    @Autowired
     private AuthenticationManager authenticationManager;
+    @Autowired
     private JwtTokenManager jwtTokenManager;
+    @Autowired
     private IUserService userService;
 
     @PostMapping("/signup")
