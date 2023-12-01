@@ -38,6 +38,7 @@ public class SecurityConfiguration implements WebMvcConfigurer {
         http.cors().and().csrf().disable()  // was cors().and() after http
                 // to implement CSRF token https://www.javainuse.com/spring/boot_security_csrf
                 // "antMathcers" comes from Apache Ant build system.
+
         .authorizeRequests().antMatchers("/signup", "/login").permitAll()
         .anyRequest().authenticated()
         .and()
@@ -61,7 +62,7 @@ public class SecurityConfiguration implements WebMvcConfigurer {
                 .allowedOriginPatterns("*") //Multiple strings allowed. Wildcard * matches all port numbers.
 //                .allowedOriginPatterns("https://icy-grass-0a8c39803.4.azurestaticapps.net:*", "http://localhost:*") //Multiple strings allowed. Wildcard * matches all port numbers.
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS") // decide which methods to allow
-                .allowedHeaders("*")
+                //.allowedHeaders("*")
                 .allowCredentials(true);
     }
 
